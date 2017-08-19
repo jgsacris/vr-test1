@@ -21,6 +21,7 @@ class App extends Component {
     }
   }
 
+  
   componentDidMount(){
     getAssets().then( assets=>{
       console.log('assets', assets);

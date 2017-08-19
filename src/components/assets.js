@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export function Assets(props){
     const assets = props.assets;
@@ -16,6 +17,17 @@ export function Assets(props){
         <a-assets>
            {imgAssets}
         </a-assets>
+    )
+}
+
+Assets.propTypes = {
+    assets : PropTypes.arrayOf(
+        PropTypes.shape({
+            images : PropTypes.shape({
+                id : PropTypes.string.isRequired,
+                src : PropTypes.string.isRequired
+            })
+        })
     )
 }
 

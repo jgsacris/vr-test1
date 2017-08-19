@@ -32,9 +32,10 @@ export function fetchAssets(){
 
         return getAssetsService()
         .then(response =>{
+            console.log('response', response);
             dispatch(assetsLoaded(response));
-            const firstSky = response[0].id;
-            console.log('firstSky', firstSky);
+            const firstSky = response.images[0].id;
+            
             dispatch(changeSky(firstSky));
         })
     }

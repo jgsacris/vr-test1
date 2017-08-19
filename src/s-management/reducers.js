@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
 
-import {LOAD_ASSETS, ASSSETS_LOADED, CHANGE_SKY} from './actions';
+import {LOAD_ASSETS, ASSETS_LOADED, CHANGE_SKY} from './actions';
 
 const initState = {
     status:'idle',
@@ -16,8 +16,10 @@ function assetsManagement(state = initState, action){
     switch( action.type){
         case LOAD_ASSETS:
             return {...state, status:'loading'}
-        case ASSSETS_LOADED:
+        case ASSETS_LOADED:
             return {...state, status:'idle', assets:action.assets}
+        default:
+            return state;
     }
 }
 
@@ -25,10 +27,16 @@ function skyManagement(state = initState, action){
     switch(action.type){
         case CHANGE_SKY:
             return {...state, sky:{...state.sky, src:action.skySrc}}
+        default:
+            return state;
     }
 }
+
+
 
 const rootReducer = combineReducers({
     assetsManagement,
     skyManagement
 })
+
+export default rootReducer;
