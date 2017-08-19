@@ -41,8 +41,6 @@ function skyManagement(state = initState.sky, action){
     }
 }
 
-
-
 const rootReducer = combineReducers({
     status:statusManager,
     assets: assetsManagement,
