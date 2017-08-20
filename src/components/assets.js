@@ -21,13 +21,14 @@ export function Assets(props){
 }
 
 Assets.propTypes = {
-    assets : PropTypes.arrayOf(
-        PropTypes.shape({
-            images : PropTypes.shape({
+    assets:PropTypes.shape({
+        images:PropTypes.arrayOf(
+            PropTypes.shape({
                 id : PropTypes.string.isRequired,
                 src : PropTypes.string.isRequired
             })
-        })
+        )
+    }
     )
 }
 

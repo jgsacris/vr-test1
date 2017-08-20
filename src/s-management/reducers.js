@@ -5,6 +5,7 @@ import {LOAD_ASSETS, ASSETS_LOADED, CHANGE_SKY} from './actions';
 const initState = {
     status:'idle',
     assets:[],
+    thumbnails: [],
     sky:{
       id:'image-360',
       radius: 10,
@@ -26,7 +27,16 @@ function statusManager(state = initState.status, action){
 function assetsManagement(state = initState.assets, action){
     switch( action.type){
         case ASSETS_LOADED:
-            return action.assets;
+            return action.response.assets;
+        default:
+            return state;
+    }
+}
+
+function thumbnailsManagement(state = initState.thumbnails, action){
+    switch( action.type){
+        case ASSETS_LOADED:
+            return action.response.thumbnails;
         default:
             return state;
     }
@@ -44,6 +54,7 @@ function skyManagement(state = initState.sky, action){
 const rootReducer = combineReducers({
     status:statusManager,
     assets: assetsManagement,
+    thumbnails: thumbnailsManagement,
     sky: skyManagement
 })
 

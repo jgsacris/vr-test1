@@ -10,12 +10,13 @@ function loadAssets(){
 
 export const ASSETS_LOADED = 'ASSETS_LOADED';
 
-function assetsLoaded(assets){
+function assetsLoaded(response){
     return {
         type: ASSETS_LOADED,
-        assets
+        response
     }
 }
+
 
 export const CHANGE_SKY = 'CHANGE_SKY';
 
@@ -34,7 +35,7 @@ export function fetchAssets(){
         .then(response =>{
             console.log('response', response);
             dispatch(assetsLoaded(response));
-            const firstSky = response.images[0].id;
+            const firstSky = response.assets.images[0].id;
             
             dispatch(changeSky(firstSky));
         })

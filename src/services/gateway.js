@@ -7,10 +7,20 @@ const imageAssets = [
     { id:"sechelt-thumb", src:"https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-sechelt.jpg"}
 ]
 
+const thumbnails = [
+    {id: "1", srcId : "city-thumb", imgId: "city"},
+    {id: "2", srcId : "cubes-thumb", imgId: "cubes"},
+    {id: "3", srcId : "sechelt-thumb", imgId: "sechelt"}
+
+]
+
 export function getAssetsService(){
     return new Promise((resolve, reject) =>{
         resolve({
-            images: imageAssets
+            assets: {
+                images: imageAssets
+            },
+            thumbnails: thumbnails
         });
     });
 }
