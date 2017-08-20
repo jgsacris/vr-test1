@@ -19,7 +19,7 @@ export function Assets(props){
         </a-assets>
     )
 }
-
+/*
 Assets.propTypes = {
     assets:PropTypes.shape({
         images:PropTypes.arrayOf(
@@ -31,4 +31,5 @@ Assets.propTypes = {
     }
     )
 }
+*/
 
