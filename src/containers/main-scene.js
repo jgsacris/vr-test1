@@ -13,6 +13,7 @@ const TheScene = ({assets, sky, thumbnails} ) =>{
     return (
         <Scene>
             <Camera><Cursor/></Camera>
+            <a-entity daydream-controls></a-entity>
             <Assets assets={assets}/>
             <Sky id={sky.id} radius={sky.radius} src={sky.src} />
             <Entity geometry={{primitive: 'box'}} material={{color:'red'}} position={{x:0, y:0, z:-5}}/>

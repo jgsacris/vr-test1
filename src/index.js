@@ -29,6 +29,6 @@ ReactDOM.render(
     <Provider store={store}>
         <MainScene/>
     </Provider>,
-    document.getElementById('root')
+    document.body
 );
 registerServiceWorker();
