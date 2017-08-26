@@ -32,13 +32,3 @@ export function Thumbnails(props) {
         </Entity>
     )
 }
-
-Thumbnails.propTypes = {
-    thumbnails: PropTypes.arrayOf(
-        PropTypes.shape({
-            id: PropTypes.string.isRequired,
-            srcId: PropTypes.string.isRequired,
-            imgId: PropTypes.string.isRequired
-        })
-    )
-}
