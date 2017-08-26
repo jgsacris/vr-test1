@@ -27,6 +27,15 @@ export function changeSky(skySrc){
     }
 }
 
+export const CHANGE_SKY_ID = 'CHANGE_SKY_ID';
+
+export function changeSkyId(thumbnailId){
+    return{
+        type: CHANGE_SKY_ID,
+        thumbnailId
+    }
+}
+
 export function fetchAssets(){
     return function (dispatch){
         dispatch(loadAssets());

@@ -8,18 +8,37 @@ import {Sky} from '../components/sky';
 import {Thumbnails} from '../components/thumbnails';
 import Camera from '../components/camera';
 import Cursor from '../components/cursor';
+import {changeSkyId} from '../s-management/actions';
 
-const TheScene = ({assets, sky, thumbnails} ) =>{
-    return (
-        <Scene>
-            <Camera><Cursor/></Camera>
-            <a-entity daydream-controls></a-entity>
-            <Assets assets={assets}/>
-            <Sky id={sky.id} radius={sky.radius} src={sky.src} />
-            <Entity geometry={{primitive: 'box'}} material={{color:'red'}} position={{x:0, y:0, z:-5}}/>
-            <Thumbnails thumbnails={thumbnails}/>
-        </Scene>
-      );
+class TheScene extends React.Component {
+
+    componentDidUpdate(prevProps, prevState){
+        console.log(prevProps, prevState)
+        let links =  document.querySelectorAll('.link');
+        console.log("links", links);
+        let props = this.props;
+        for(let i = 0; i < links.length; ++i){
+            let link = links[i];
+            console.log("link", link);
+            link.addEventListener('click', (ev)=>{
+                console.log("click", ev.target.id);
+                props.onThumbnailClick( ev.target.id);
+            })
+        }
+    }
+
+    render(){
+        return (
+            <Scene>
+                <Camera><Cursor/></Camera>
+                <Assets assets={this.props.assets}/>
+                <Sky id={this.props.sky.id} radius={this.props.sky.radius} src={this.props.sky.src} />
+                <Entity geometry={{primitive: 'box'}} material={{color:'red'}} position={{x:0, y:0, z:-5}}/>
+                <Thumbnails thumbnails={this.props.thumbnails}/>
+            </Scene>
+        );
+    }
+    
 }
 
 const mapStateToProps = state =>{
@@ -31,8 +50,17 @@ const mapStateToProps = state =>{
     }
 }
 
+const mapDispatchToProps = dispatch =>{
+    return {
+        onThumbnailClick: thumbId =>{
+            dispatch(changeSkyId(thumbId))
+        }
+    }
+}
+
 const MainScene = connect(
-    mapStateToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(TheScene);
 
 export default MainScene

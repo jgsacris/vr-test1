@@ -1,6 +1,7 @@
 import {combineReducers} from 'redux';
+import {find, propEq} from 'ramda';
 
-import {LOAD_ASSETS, ASSETS_LOADED, CHANGE_SKY} from './actions';
+import {LOAD_ASSETS, ASSETS_LOADED, CHANGE_SKY, CHANGE_SKY_ID} from './actions';
 
 const initState = {
     status:'idle',
@@ -42,20 +43,35 @@ function thumbnailsManagement(state = initState.thumbnails, action){
     }
 }
 
-function skyManagement(state = initState.sky, action){
+function skyManagement(sky = initState.sky, thumbnails = initState.thumbnails,  action){
     switch(action.type){
         case CHANGE_SKY:
-            return {...state, src:action.skySrc}
+            return {...sky, src:action.skySrc}
+        case CHANGE_SKY_ID:
+            let id = action.thumbnailId;
+            let cThumb = find(propEq('id', id))(thumbnails);
+            console.log("id", id, thumbnails, cThumb);
+            return {...sky, src:cThumb.imgId};
         default:
-            return state;
+            return sky;
     }
 }
 
+function rootReducer(state = initState, action){
+    return {
+        status: statusManager(state.status, action),
+        assets: assetsManagement(state.assets, action),
+        thumbnails: thumbnailsManagement(state.thumbnails, action),
+        sky: skyManagement(state.sky, state.thumbnails, action)
+    }
+}
+/*
 const rootReducer = combineReducers({
     status:statusManager,
     assets: assetsManagement,
     thumbnails: thumbnailsManagement,
     sky: skyManagement
 })
+*/
 
 export default rootReducer;
